@@ -5,14 +5,21 @@ from PIL import Image, ImageTk
 import re
 from collections import defaultdict
 
+
+    # Esta clase se utiliza para crear objetos que representan tokens individuales. 
 class Token:
     def __init__(self, type, value):
         self.type = type
         self.value = value
+        
+    #Esta clase Esta define cómo funciona el analizador léxico
+    #especificando los tipos de tokens y sus expresiones regulares correspondientes
 
 class Lexer:
     def __init__(self):
         self.token_specification = [
+            
+            # se especifica la categoria y los tokens que tiene cada categoria 
             ('Operadores_aritméticos', r'S\+|R\-|M\*|D\/|P\%|E\^'),
             ('Operadores_relacionales', r'>>|<<|>>=|<<=|<==>|!='),
             ('Operadores_lógicos', r'YY|OO|NO'),
@@ -43,8 +50,12 @@ class Lexer:
             ('MISMATCH', r'.'),
         ]
         
+        # cambia el _ por un espacio en blanco para mostrar en la tabla
         self.token_descriptions = {spec[0]: spec[0].replace('_', ' ') for spec in self.token_specification}
 
+
+    # El propósito de este método es analizar una cadena de texto que ingresa el usuario y dividirla en una 
+    # secuencia de tokens según las especificaciones de los tokens definidas en la clase lexer
     def tokenize(self, text):
         tok_regex = '|'.join(f'(?P<{pair[0]}>{pair[1]})' for pair in self.token_specification)
         get_token = re.compile(tok_regex, re.DOTALL | re.MULTILINE).finditer

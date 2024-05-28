@@ -5,9 +5,13 @@ from PIL import Image, ImageTk
 import re
 from collections import defaultdict
 
+    #Esta clase realiza las graficas de los automatas con los tokens reconocidos anteriormente     
 class AutomatonVisualizer:
     def __init__(self):
         pass
+    
+    #El propósito de este método es construir y dibujar un autómata finito determinista (AFD) 
+    #basado en una lista de tokens y luego guardar la imagen resultante como un archivo PNG
 
     def draw_combined_automaton(self, tokens, filename):
         graph = pydot.Dot(graph_type='digraph', rankdir='LR')
@@ -45,15 +49,16 @@ class AutomatonVisualizer:
                 
                 i += 1
             
-            # Mark the final state of the current token
+            # Marcar el estado final del token actual
             graph.add_node(pydot.Node(current_state, shape='doublecircle'))
-            current_state = initial_state  # Reset to start state for the next token
+            current_state = initial_state  
 
         graph.write_png(filename)
 
+    #Se encarga de mostrar el automata finito determinista generado y lo guarda como imagenes en la misma carpeta
     def display_automaton(self, canvas, path):
         img = Image.open(path)
-        img = img.resize((600, 200), Image.LANCZOS)
+        img = img.resize((500, 200), Image.LANCZOS)
         img_tk = ImageTk.PhotoImage(img)
         canvas.create_image(0, 0, anchor=tk.NW, image=img_tk)
         canvas.image = img_tk
