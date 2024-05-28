@@ -1,9 +1,12 @@
-#                           ANALIZADOR 
-#                                Lexico
+#                   ANALIZADOR 
+#                       Lexico
+#
 #Presentado por: David Serna Restrepo
 #                Esteban Julian Ortega
 #
 #Presentado a: Ana Maria Tamayo
+
+# Programa que analiza una cadena de caracteres, identifica 
 
 
 import tkinter as tk

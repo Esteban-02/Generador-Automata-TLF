@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import pydot
 from PIL import Image, ImageTk
 import re
@@ -37,17 +38,17 @@ class Lexer:
             ('Enteros', r'\b(entero|logaritmo|crto|byte)\b'),
             ('Reales', r'\b(flotante|doble)\b'),
             ('Cadenas_de_caracteres_con_3_caracteres_especiales', r'}n|}t|}s'),
-            ('Caracteres', r'\bcarácter\b'),
+            ('Caracteres', r'\bcaracter\b'),
             ('Palabra_para_los_enteros', r'\b(ent|lgo|crto|byte)\b'),
             ('Palabra_para_los_reales', r'\b(flot|dbl)\b'),
-            ('Palabra_para_cadenas_de_caracteres', r'\b(cdna)\b'),
+            ('Cadenas_de_caracteres', r'\b(cdna)\b'),
             ('Palabra_para_los_caracteres', r'\b(crte)\b'),
-            ('ID', r'\b[A-Za-z_]\w*\b'),
+            ('Palabra', r'\b[A-Za-z_]\w*\b'),
             ('NUMBER', r'\b\d+(\.\d*)?\b'),
             ('COMMENT', r'//.*?$|/\*.*?\*/'),
             ('NEWLINE', r'\n'),
-            ('SKIP', r'[ \t]+'),
-            ('MISMATCH', r'.'),
+            ('MISMATCH', r'.')  # Patrón para cualquier otro carácter no clasificado
+            
         ]
         
         # cambia el _ por un espacio en blanco para mostrar en la tabla
@@ -67,6 +68,8 @@ class Lexer:
             if kind == 'NEWLINE' or kind == 'SKIP':
                 continue
             if kind == 'MISMATCH':
-                raise RuntimeError(f'{value!r} unexpected')
+                # Lanza una ventana emergente con el mensaje de error
+                messagebox.showerror("Error", f"Token no encontrado: {value!r}")
+                raise RuntimeError(f'Token no encontrado: {value!r}')
             tokens.append(Token(kind, value))
         return tokens
