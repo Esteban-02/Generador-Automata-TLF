@@ -13,8 +13,8 @@ class Token:
         self.type = type
         self.value = value
         
-    #Esta clase Esta define cómo funciona el analizador léxico
-    #especificando los tipos de tokens y sus expresiones regulares correspondientes
+    # Esta clase Esta define cómo funciona el analizador léxico
+    # especificando los tipos de tokens y sus expresiones regulares correspondientes
 
 class Lexer:
     def __init__(self):
@@ -53,7 +53,7 @@ class Lexer:
             
         ]
         
-        # cambia el _ por un espacio en blanco para mostrar en la tabla
+        # Cambia el _ por un espacio en blanco para mostrar en la tabla
         self.token_descriptions = {spec[0]: spec[0].replace('_', ' ') for spec in self.token_specification}
 
 
