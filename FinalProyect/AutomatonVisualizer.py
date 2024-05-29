@@ -5,13 +5,13 @@ from PIL import Image, ImageTk
 import re
 from collections import defaultdict
 
-    #Esta clase realiza las graficas de los automatas con los tokens reconocidos anteriormente     
+    # Esta clase realiza las graficas de los automatas con los tokens reconocidos anteriormente     
 class AutomatonVisualizer:
     def __init__(self):
         pass
     
-    #El propósito de este método es construir y dibujar un autómata finito determinista (AFD) 
-    #basado en una lista de tokens y luego guardar la imagen resultante como un archivo PNG
+    # El propósito de este método es construir y dibujar un autómata finito determinista (AFD) 
+    # Basado en una lista de tokens y luego guardar la imagen resultante como un archivo PNG
 
     def draw_combined_automaton(self, tokens, filename):
         graph = pydot.Dot(graph_type='digraph', rankdir='LR')
@@ -30,14 +30,14 @@ class AutomatonVisualizer:
                 char = token_value[i]
                 next_state = f'S{node_count}'
 
-                # Check for repetition to form a loop
+                # Comprueba si hay repetición para formar un bucle
                 repeat_count = 1
                 while i + 1 < len(token_value) and token_value[i + 1] == char:
                     repeat_count += 1
                     i += 1
                 
                 if repeat_count > 1:
-                    # Create a loop if the character repeats
+                    # Crea un bucle si el caracter se repite
                     graph.add_edge(pydot.Edge(current_state, current_state, label=char))
                 else:
                     if next_state not in state_dict:
@@ -55,7 +55,7 @@ class AutomatonVisualizer:
 
         graph.write_png(filename)
 
-    #Se encarga de mostrar el automata finito determinista generado y lo guarda como imagenes en la misma carpeta
+    # Se encarga de mostrar el automata finito determinista generado y lo guarda como imagenes en la misma carpeta
     def display_automaton(self, canvas, path):
         img = Image.open(path)
         img = img.resize((500, 200), Image.LANCZOS)
