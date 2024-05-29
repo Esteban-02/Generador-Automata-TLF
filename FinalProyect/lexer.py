@@ -47,7 +47,9 @@ class Lexer:
             ('NUMBER', r'\b\d+(\.\d*)?\b'),
             ('COMMENT', r'//.*?$|/\*.*?\*/'),
             ('NEWLINE', r'\n'),
-            ('MISMATCH', r'.')  # Patrón para cualquier otro carácter no clasificado
+            ('SKIP', r'[ \t]+'),  # Ignorar espacios en blanco
+            ('MISMATCH', r'.'),   # Manejar cualquier otro carácter no reconocido
+            
             
         ]
         
